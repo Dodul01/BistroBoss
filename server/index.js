@@ -27,13 +27,21 @@ async function run() {
         // await client.connect();
         const db = client.db('BistroBoss');
         const menusCollection = db.collection('menu');
+        const reviewsCollection = db.collection('reviews');
 
         app.get('/menus', async (req, res) => {
             const find = menusCollection.find();
             const menus = await find.toArray()
-            
+
             res.send(menus);
         })
+
+        app.get('/reviews', async (req, res) => {
+            const find = reviewsCollection.find();
+            const reviews = await find.toArray();
+
+            res.send(reviews);
+        });
 
         // Send a ping to confirm a successful connection
         // await client.db("admin").command({ ping: 1 });
