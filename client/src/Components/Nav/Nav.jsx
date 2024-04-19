@@ -6,6 +6,7 @@ const Nav = () => {
         <Link className="block py-2 px-3 text-[#D99904] rounded md:bg-transparent hover:text-[#EEFF25] transition-all md:p-0" to="/">Home</Link>
         <Link className="block py-2 px-3 text-[#D99904] rounded md:bg-transparent hover:text-[#EEFF25] transition-all md:p-0" to="/menu">Menu</Link>
         <Link className="block py-2 px-3 text-[#D99904] rounded md:bg-transparent hover:text-[#EEFF25] transition-all md:p-0" to="/order">Order Food</Link>
+        <Link className="block py-2 px-3 text-[#D99904] rounded md:bg-transparent hover:text-[#EEFF25] transition-all md:p-0" to="/signUp">Sign Up</Link>
     </>
 
     return (
