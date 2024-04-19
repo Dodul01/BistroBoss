@@ -5,13 +5,15 @@ import Nav from "../../Components/Nav/Nav"
 const Main = () => {
     const location = useLocation();
 
+    const noHederFooter = location.pathname.includes('signUp') || location.pathname.includes('signIn')
+
     return (
         <div>
-            {location.pathname.includes('signUp') || <Nav />}
+            {noHederFooter || <Nav />}
             <div className="min-h-[68vh]">
                 <Outlet />
             </div>
-            {location.pathname.includes('signUp') || <Footer />}
+            {noHederFooter || <Footer />}
         </div>
     )
 }
