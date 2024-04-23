@@ -1,14 +1,17 @@
+import { useContext } from 'react';
 import bgImage from '../../assets/Images/others/authentication.png';
 import authenticationImg from '../../assets/Images/others/authentication2.png';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthProviders';
 
 
 const SignUp = () => {
+  const { createUser } = useContext(AuthContext);
+
   const handleSignUp = (e) => {
     const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    const userInfo = { name, email, password };
     e.preventDefault();
 
     // Password strength validation
@@ -17,7 +20,12 @@ const SignUp = () => {
       return;
     }
 
-    console.log(userInfo);
+    createUser(email, password)
+      .then(res => {
+        const user = res.user;
+        console.log(user);
+      })
+
     e.target.reset();
   }
 
