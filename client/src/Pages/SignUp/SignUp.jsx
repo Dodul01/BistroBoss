@@ -3,6 +3,7 @@ import bgImage from '../../assets/Images/others/authentication.png';
 import authenticationImg from '../../assets/Images/others/authentication2.png';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProviders';
+import { Helmet } from 'react-helmet-async';
 
 
 const SignUp = () => {
@@ -32,6 +33,10 @@ const SignUp = () => {
 
   return (
     <div className='relative'>
+      <Helmet>
+        <title>BistroBoss - Sign Up</title>
+      </Helmet>
+
       <div className='absolute top-0 left-0'>
         <img className='w-[100vw] h-[100vh]' src={bgImage} alt="" />
       </div>

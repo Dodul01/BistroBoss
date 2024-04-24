@@ -1,23 +1,35 @@
+import { useContext } from 'react';
 import bgImage from '../../assets/Images/others/authentication.png';
 import authenticationImg from '../../assets/Images/others/authentication2.png';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthProviders';
+import { Helmet } from 'react-helmet-async';
 
 
 const SignIn = () => {
+    const { signInUser } = useContext(AuthContext);
+
     const handleSignIn = (e) => {
-        const name = e.target.name.value;
+        const email = e.target.email.value;
         const password = e.target.password.value;
-        const userInfo = { name,  password };
+
         e.preventDefault();
-        
-        console.log(userInfo);
-        
+
+        signInUser(email, password)
+            .then(response => {
+                const user = response.user;
+                console.log(user);
+            })
+
         e.target.reset();
-      }
-    
+    }
+
 
     return (
         <div className='relative'>
+            <Helmet>
+                <title>BistroBoss - SignIn</title>
+            </Helmet>
             <div className='absolute top-0 left-0'>
                 <img className='w-[100vw] h-[100vh]' src={bgImage} alt="" />
             </div>
@@ -30,9 +42,9 @@ const SignIn = () => {
                         <div>
                             {/* Name */}
                             <div className='mb-4'>
-                                <label className='font-semibold'>Name</label>
+                                <label className='font-semibold'>Email</label>
                                 <div className="relative w-full mt-2">
-                                    <input type="text" name='name' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#bb85063d] outline-[#bb85063d] block w-full p-4 " placeholder="Your Name" required />
+                                    <input type="email" name='email' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#bb85063d] outline-[#bb85063d] block w-full p-4 " placeholder="Your Name" required />
                                 </div>
                             </div>
 

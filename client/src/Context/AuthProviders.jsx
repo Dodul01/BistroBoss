@@ -19,7 +19,7 @@ const AuthProviders = ({ children }) => {
     // Sign In With Firebase
     const signInUser = (email, password) => {
         setLoading(true);
-        return signInWithEmailAndPassword(email, password);
+        return signInWithEmailAndPassword(auth, email, password);
     }
 
     // Sign Out With Firebase
