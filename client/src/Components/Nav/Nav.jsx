@@ -1,12 +1,39 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/Images/logo.png';
+import { useContext } from 'react';
+import { AuthContext } from '../../Context/AuthProviders';
+import Swal from 'sweetalert2';
+import { BsCart4 } from "react-icons/bs";
 
 const Nav = () => {
+    const { user, logOut } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleSignOut = () => {
+        logOut()
+            .then(() => {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Sign Out Successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                navigate('/')
+            })
+    }
+
     const link = <>
         <Link className="block py-2 px-3 text-[#D99904] rounded md:bg-transparent hover:text-[#EEFF25] transition-all md:p-0" to="/">Home</Link>
         <Link className="block py-2 px-3 text-[#D99904] rounded md:bg-transparent hover:text-[#EEFF25] transition-all md:p-0" to="/menu">Menu</Link>
         <Link className="block py-2 px-3 text-[#D99904] rounded md:bg-transparent hover:text-[#EEFF25] transition-all md:p-0" to="/order">Order Food</Link>
-        <Link className="block py-2 px-3 text-[#D99904] rounded md:bg-transparent hover:text-[#EEFF25] transition-all md:p-0" to="/signUp">Sign Up</Link>
+        <Link className="block py-2 px-3 text-[#D99904] rounded md:bg-transparent hover:text-[#EEFF25] transition-all md:p-0" to="/myCart"><BsCart4 className='text-2xl' /></Link>
+        {
+            user ?
+                <button onClick={() => handleSignOut()} className="px-4 py-3 text-sm transition-all font-medium text-center border border-b-2 border-[#BB8506] text-white bg-[#BB8506] rounded-lg hover:bg-[#111827] hover:text-[#BB8506] focus:ring-4 focus:outline-none focus:ring-[#bb85063d]">Sign Out</button>
+                :
+                <Link className="block py-2 px-3 text-[#D99904] rounded md:bg-transparent hover:text-[#EEFF25] transition-all md:p-0" to="/signUp">Sign Up</Link>
+        }
     </>
 
     return (
@@ -23,7 +50,7 @@ const Nav = () => {
                     </svg>
                 </button>
                 <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-                    <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
+                    <ul className="font-medium flex items-center flex-col p-4 md:p-0 mt-4 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
                         {link}
                     </ul>
                 </div>

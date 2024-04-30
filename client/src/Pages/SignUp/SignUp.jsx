@@ -4,6 +4,7 @@ import authenticationImg from '../../assets/Images/others/authentication2.png';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProviders';
 import { Helmet } from 'react-helmet-async';
+import Swal from 'sweetalert2';
 
 
 const SignUp = () => {
@@ -17,14 +18,36 @@ const SignUp = () => {
 
     // Password strength validation
     if (password.length < 8) {
-      alert("Password must be at least 8 characters long.");
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Password must be at least 8 characters long.",
+        showConfirmButton: false,
+        timer: 5000
+      })
+      // alert("Password must be at least 8 characters long.");
       return;
     }
 
     createUser(email, password)
       .then(res => {
         const user = res.user;
-        console.log(user);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Sign Up Sucessfully.",
+          showConfirmButton: false,
+          timer: 1500
+        })
+      })
+      .catch((error) => {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: `${error}`,
+          showConfirmButton: false,
+          timer: 5000
+        })
       })
 
     e.target.reset();

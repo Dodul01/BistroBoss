@@ -1,13 +1,14 @@
 import { useContext } from 'react';
 import bgImage from '../../assets/Images/others/authentication.png';
 import authenticationImg from '../../assets/Images/others/authentication2.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProviders';
 import { Helmet } from 'react-helmet-async';
-
+import Swal from 'sweetalert2'
 
 const SignIn = () => {
     const { signInUser } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleSignIn = (e) => {
         const email = e.target.email.value;
@@ -17,8 +18,23 @@ const SignIn = () => {
 
         signInUser(email, password)
             .then(response => {
-                const user = response.user;
-                console.log(user);
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Sign In Successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                navigate("/menu");
+            })
+            .catch(error => {
+                Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: `${error}`,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             })
 
         e.target.reset();
