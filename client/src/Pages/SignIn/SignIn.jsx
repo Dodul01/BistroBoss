@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import bgImage from '../../assets/Images/others/authentication.png';
 import authenticationImg from '../../assets/Images/others/authentication2.png';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProviders';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2'
@@ -9,6 +9,8 @@ import Swal from 'sweetalert2'
 const SignIn = () => {
     const { signInUser } = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const handleSignIn = (e) => {
         const email = e.target.email.value;
@@ -25,7 +27,7 @@ const SignIn = () => {
                     showConfirmButton: false,
                     timer: 1500
                 })
-                navigate("/menu");
+                navigate(from, {replace: true});
             })
             .catch(error => {
                 Swal.fire({

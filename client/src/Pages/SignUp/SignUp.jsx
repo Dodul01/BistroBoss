@@ -1,19 +1,21 @@
 import { useContext } from 'react';
 import bgImage from '../../assets/Images/others/authentication.png';
 import authenticationImg from '../../assets/Images/others/authentication2.png';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProviders';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
 
 
 const SignUp = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSignUp = (e) => {
     const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
+    const photo = e.target.photoURL.value;
     e.preventDefault();
 
     // Password strength validation
@@ -25,20 +27,26 @@ const SignUp = () => {
         showConfirmButton: false,
         timer: 5000
       })
-      // alert("Password must be at least 8 characters long.");
       return;
     }
 
     createUser(email, password)
       .then(res => {
         const user = res.user;
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Sign Up Sucessfully.",
-          showConfirmButton: false,
-          timer: 1500
-        })
+        updateUserProfile(name, photo)
+          .then(() => {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Sign Up Sucessfully.",
+              showConfirmButton: false,
+              timer: 1500
+            })
+            navigate('/menu')
+          })
+          .catch((error) => {
+            console.log(error);
+          })
       })
       .catch((error) => {
         Swal.fire({
@@ -75,6 +83,14 @@ const SignUp = () => {
                 <label className='font-semibold'>Name</label>
                 <div className="relative w-full mt-2">
                   <input type="text" name='name' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#bb85063d] outline-[#bb85063d] block w-full p-4 " placeholder="Your Name" required />
+                </div>
+              </div>
+
+              {/* Photo URL */}
+              <div className='mb-4'>
+                <label className='font-semibold'>Photo URL</label>
+                <div className="relative w-full mt-2">
+                  <input type="text" name='photoURL' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#bb85063d] outline-[#bb85063d] block w-full p-4 " placeholder="Your Photo URL" required />
                 </div>
               </div>
 
