@@ -4,10 +4,12 @@ import { useContext } from 'react';
 import { AuthContext } from '../../Context/AuthProviders';
 import Swal from 'sweetalert2';
 import { BsCart4 } from "react-icons/bs";
+import useCart from '../../hooks/useCart';
 
 const Nav = () => {
     const { user, logOut } = useContext(AuthContext);
     const navigate = useNavigate();
+    const [cart] = useCart();
 
     const handleSignOut = () => {
         logOut()
@@ -27,7 +29,7 @@ const Nav = () => {
         <Link className="block py-2 px-3 text-[#D99904] rounded md:bg-transparent hover:text-[#EEFF25] transition-all md:p-0" to="/">Home</Link>
         <Link className="block py-2 px-3 text-[#D99904] rounded md:bg-transparent hover:text-[#EEFF25] transition-all md:p-0" to="/menu">Menu</Link>
         <Link className="block py-2 px-3 text-[#D99904] rounded md:bg-transparent hover:text-[#EEFF25] transition-all md:p-0" to="/order">Order Food</Link>
-        <Link className="block py-2 px-3 text-[#D99904] rounded md:bg-transparent hover:text-[#EEFF25] transition-all md:p-0" to="/myCart"><BsCart4 className='text-2xl' /></Link>
+        <Link className="flex gap-2 py-2 px-3 text-[#D99904] rounded md:bg-transparent hover:text-[#EEFF25] transition-all md:p-0 " to="/myCart"><BsCart4 className='text-2xl' /> <span>{cart?.length}</span></Link>
         {
             user ?
                 <button onClick={() => handleSignOut()} className="px-4 py-3 text-sm transition-all font-medium text-center border border-b-2 border-[#BB8506] text-white bg-[#BB8506] rounded-lg hover:bg-[#111827] hover:text-[#BB8506] focus:ring-4 focus:outline-none focus:ring-[#bb85063d]">Sign Out</button>

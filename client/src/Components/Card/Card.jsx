@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useCart from "../../hooks/useCart";
 
 const Card = ({ item }) => {
     const { image, name, recipe, price } = item;
@@ -10,6 +11,7 @@ const Card = ({ item }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const axiosSecure = useAxiosSecure();
+    const [, refetch] = useCart();
 
     const getItem = (food) => {
         if (user && user.email) {
@@ -30,6 +32,9 @@ const Card = ({ item }) => {
                             showConfirmButton: false,
                             timer: 2500
                         });
+
+                        // refetch the carts items to update the count
+                        refetch();
                     }
                 });
         } else {
