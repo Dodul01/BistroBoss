@@ -12,22 +12,22 @@ const Banner = () => {
         <section>
             <Carousel autoPlay={true} infiniteLoop={true} interval={2500}>
                 <div>
-                    <img src={slider1} />
+                    <img src={slider1} alt="banner_image"/>
                 </div>
                 <div>
-                    <img src={slider2} />
+                    <img src={slider2} alt="banner_image"/>
                 </div>
                 <div>
-                    <img src={slider3} />
+                    <img src={slider3} alt="banner_image"/>
                 </div>
                 <div>
-                    <img src={slider4} />
+                    <img src={slider4} alt="banner_image"/>
                 </div>
                 <div>
-                    <img src={slider5} />
+                    <img src={slider5} alt="banner_image"/>
                 </div>
                 <div>
-                    <img src={slider6} />
+                    <img src={slider6} alt="banner_image"/>
                 </div>
             </Carousel>
         </section>
