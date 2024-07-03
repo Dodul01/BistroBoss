@@ -1,10 +1,16 @@
 import { Link, Outlet } from "react-router-dom"
-import { FaCalendarCheck, FaCommentAlt, FaHome, FaShoppingCart, FaWallet } from "react-icons/fa";
+import { FaBook, FaCalendarCheck, FaCommentAlt, FaHome, FaShoppingCart, FaWallet } from "react-icons/fa";
 import { FaBagShopping, FaCalendar } from "react-icons/fa6";
+import { ImSpoonKnife } from "react-icons/im";
+import { LiaListSolid } from "react-icons/lia";
 import { IoMail, IoMenu } from "react-icons/io5";
+import { TiGroup } from "react-icons/ti";
 import useCart from "../../hooks/useCart";
+
 const Dashbord = () => {
-    const [cart] = useCart()
+    const [cart] = useCart();
+
+    const isAdmin = true;
 
     const links = <>
         <li>
@@ -41,6 +47,39 @@ const Dashbord = () => {
             <Link to={'/dashbord/cart'} className="flex items-center uppercase p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
                 <FaCalendarCheck className="text-2xl black" />
                 <span className="ms-3">My Booking</span>
+            </Link>
+        </li>
+    </>
+
+    const adminLink = <>
+        <li>
+            <Link to={'/dashbord/cart'} className="flex items-center uppercase p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
+                <FaHome className="text-2xl black" />
+                <span className="ms-3">Admin Home </span>
+            </Link>
+        </li>
+        <li>
+            <Link to={'/dashbord/cart'} className="flex items-center uppercase p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
+                <ImSpoonKnife className="text-2xl black" />
+                <span className="ms-3">Add Item</span>
+            </Link>
+        </li>
+        <li>
+            <Link to={'/dashbord/cart'} className="flex items-center uppercase p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
+                <LiaListSolid className="text-2xl black" />
+                <span className="ms-3">Manage Items</span>
+            </Link>
+        </li>
+        <li>
+            <Link to={'/dashbord/cart'} className="flex items-center uppercase p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
+                <FaBook className="text-2xl black" />
+                <span className="ms-3">Manage Bookings</span>
+            </Link>
+        </li>
+        <li>
+            <Link to={'/dashbord/users'} className="flex items-center uppercase p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
+                <TiGroup className="text-2xl black" />
+                <span className="ms-3">All Users</span>
             </Link>
         </li>
     </>
@@ -86,7 +125,7 @@ const Dashbord = () => {
                     <h1 className="text-4xl font-bold font-serif">Bistro Boss</h1>
                     <h1 className="text-4xl font-bold font-serif mb-10">Resturent</h1>
                     <ul className="space-y-2 font-medium">
-                        {links}
+                        {isAdmin ? adminLink : links}
                     </ul>
                     <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-black">
                         {bottomLinks}

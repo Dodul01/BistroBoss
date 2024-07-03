@@ -38,11 +38,16 @@ async function run() {
             const isExsist = await usersCollection.findOne(query);
 
             if (isExsist) {
-                return res.send({message: 'User already exsist.'});
+                return res.send({ message: 'User already exsist.' });
             }
 
             const result = await usersCollection.insertOne(user);
-            
+
+            res.send(result);
+        })
+
+        app.get('/users', async (req, res) => {
+            const result = await usersCollection.find().toArray();
             res.send(result);
         })
 
