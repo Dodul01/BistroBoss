@@ -32,6 +32,31 @@ async function run() {
         const reviewsCollection = db.collection('reviews');
         const cartCollection = db.collection('carts');
 
+        // middleware
+        const verifyToken = (req, res, next) => {
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: 'Forbidden Access.' });
+            }
+
+            const token = req.headers.authorization.split(' ')[1];
+
+            jwt.verify(token, process.env.ACCESS_TOKEN, (err, decoded) => {
+                if (err) {
+                    return res.status(401).send({ message: 'Forbidden Access.' })
+                }
+
+                req.decoded = decoded;
+                next();
+            })
+        }
+
+        app.post('/jwt', async (req, res) => {
+            // Payload
+            const user = req.body;
+            const token = jwt.sign(user, process.env.ACCESS_TOKEN, { expiresIn: '1d' });
+            res.send({ token });
+        })
+
         app.post('/users', async (req, res) => {
             const user = req.body;
             // TODO: Insert user data if user dosen't exsist
@@ -47,7 +72,7 @@ async function run() {
             res.send(result);
         })
 
-        app.get('/users', async (req, res) => {
+        app.get('/users', verifyToken, async (req, res) => {
             const result = await usersCollection.find().toArray();
             res.send(result);
         })
@@ -62,9 +87,9 @@ async function run() {
 
         app.patch('/users/admin/:id', async (req, res) => {
             const id = req.params.id;
-            const filter = {_id: new ObjectId(id)};
+            const filter = { _id: new ObjectId(id) };
             const updatedUser = {
-                $set : {
+                $set: {
                     role: 'admin'
                 }
             }
