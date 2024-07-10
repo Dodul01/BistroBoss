@@ -6,11 +6,13 @@ import { LiaListSolid } from "react-icons/lia";
 import { IoMail, IoMenu } from "react-icons/io5";
 import { TiGroup } from "react-icons/ti";
 import useCart from "../../hooks/useCart";
+import useAdmin from "../../hooks/useAdmin";
 
 const Dashbord = () => {
     const [cart] = useCart();
 
-    const isAdmin = true;
+    // const isAdmin = true;
+    const [isAdmin] = useAdmin();
 
     const links = <>
         <li>
