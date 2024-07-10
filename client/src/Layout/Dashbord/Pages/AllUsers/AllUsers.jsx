@@ -15,7 +15,7 @@ const AllUsers = () => {
             const res = await axiosSecure.get('/users');
             return res.data;
         }
-    })
+    });
 
     const handleDelete = (user) => {
         const id = user._id;

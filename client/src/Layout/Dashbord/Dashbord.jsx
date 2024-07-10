@@ -61,7 +61,7 @@ const Dashbord = () => {
             </Link>
         </li>
         <li>
-            <Link to={'/dashbord/cart'} className="flex items-center uppercase p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
+            <Link to={'/dashbord/addItem'} className="flex items-center uppercase p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
                 <ImSpoonKnife className="text-2xl black" />
                 <span className="ms-3">Add Item</span>
             </Link>
