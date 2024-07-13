@@ -3,6 +3,7 @@ import SectionHeading from "../../../../Components/SectionHeading/SectionHeading
 import useMenu from "../../../../hooks/useMenu"
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const ManageItems = () => {
     const [menu, loading, refetch] = useMenu();
@@ -87,9 +88,11 @@ const ManageItems = () => {
                                 </div>
                             </td>
                             <td className="px-6 py-4 flex gap-2">
-                                <div class="flex items-center bg-[#D1A054] text-white p-2 rounded-lg w-10 cursor-pointer">
-                                    <FaPen className="text-2xl " />
-                                </div>
+                                <Link to={`/dashbord/updateItem/${item?._id}`}>
+                                    <div class="flex items-center bg-[#D1A054] text-white p-2 rounded-lg w-10 cursor-pointer">
+                                        <FaPen className="text-2xl " />
+                                    </div>
+                                </Link>
                                 <button onClick={() => handleDeleteItem(item)} className="p-2 rounded-lg bg-red-500">
                                     <FaTrash className="text-xl text-white" />
                                 </button>

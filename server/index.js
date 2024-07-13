@@ -130,6 +130,14 @@ async function run() {
             res.send(result);
         });
 
+
+        app.get('/menu/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: new ObjectId(id) };
+            const result = await menusCollection.findOne(query);
+            res.send(result);
+        })
+
         app.post('/menu', verifyToken, verifyAdmin, async (req, res) => {
             const menu = req.body;
             const result = await menusCollection.insertOne(menu);
@@ -147,6 +155,24 @@ async function run() {
             const id = req.params.id;
             const query = { _id: new ObjectId(id) };
             const result = await menusCollection.deleteOne(query);
+
+            res.send(result)
+        })
+
+        app.patch('/menu/:id', verifyToken, verifyAdmin, async (req, res) => {
+            const item = req.body;
+            const id = req.params.id;
+            const filter = { _id: new ObjectId(id) };
+            const updatedDoc = {
+                $set: {
+                    name: item.name,
+                    category: item.category,
+                    price: item.price,
+                    recipe: item.recipe,
+                    image: item.image
+                }
+            }
+            const result = await menusCollection.updateOne(filter, updatedDoc);
 
             res.send(result)
         })
