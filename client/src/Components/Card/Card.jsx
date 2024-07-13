@@ -58,7 +58,7 @@ const Card = ({ item }) => {
         <div className="max-w-sm bg-[#E8E8E8] border border-gray-200 rounded-lg shadow">
             <span className="relative">
                 <p className=" absolute top-2 font-semibold right-2 px-4 py-2 bg-slate-800 text-white rounded">${price}</p>
-                <img className="rounded-t-lg" src={image} alt={`${name} image`} />
+                <img className="rounded-t-lg object-cover bg-center" src={image} alt={`${name} image`} />
             </span>
             <div className="p-5">
                 <span>

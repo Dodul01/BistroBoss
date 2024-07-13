@@ -130,11 +130,26 @@ async function run() {
             res.send(result);
         });
 
+        app.post('/menu', verifyToken, verifyAdmin, async (req, res) => {
+            const menu = req.body;
+            const result = await menusCollection.insertOne(menu);
+
+            res.send(result);
+        })
+
         app.get('/menus', async (req, res) => {
             const find = menusCollection.find();
             const menus = await find.toArray();
             res.send(menus);
         });
+
+        app.delete('/menu/:id', verifyToken, verifyAdmin, async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: new ObjectId(id) };
+            const result = await menusCollection.deleteOne(query);
+
+            res.send(result)
+        })
 
         app.get('/reviews', async (req, res) => {
             const find = reviewsCollection.find();
@@ -164,6 +179,7 @@ async function run() {
 
             res.send(result)
         })
+
 
         // Send a ping to confirm a successful connection
         // await client.db("admin").command({ ping: 1 });
