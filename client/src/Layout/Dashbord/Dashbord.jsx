@@ -94,7 +94,7 @@ const Dashbord = () => {
             </Link>
         </li>
         <li>
-            <Link to={''} className="flex items-center uppercase p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
+            <Link to={'/order'} className="flex items-center uppercase p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
                 <IoMenu className="text-2xl black" />
                 <span className="ms-3">Menu</span>
             </Link>
