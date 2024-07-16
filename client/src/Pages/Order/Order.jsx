@@ -11,7 +11,7 @@ const Order = () => {
     const pizza = menu.filter(item => item.category === 'pizza');
     const salad = menu.filter(item => item.category === 'salad');
     const soup = menu.filter(item => item.category === 'soup');
-    const drinks = menu.filter(item => item.category === 'drinks');
+    const drinks = menu.filter(item => item.category === 'drink');
 
     /*
      * TODO: pegination 
@@ -43,7 +43,7 @@ const Order = () => {
                     <p onClick={() => setSelectedItem('desserts')} className={`text-lg font-semibold p-3 border-b-4 cursor-pointer ${selectedItem === 'desserts' ? 'text-[#D99904] border-[#D99904]' : 'text-[#151515] border-transparent hover:border-[#151515]'} transition-all`}>DESSERT</p>
                 </li>
                 <li>
-                    <p onClick={() => setSelectedItem('drinks')} className={`text-lg font-semibold p-3 border-b-4 cursor-pointer ${selectedItem === 'drinks' ? 'text-[#D99904] border-[#D99904]' : 'text-[#151515] border-transparent hover:border-[#151515]'} transition-all`}>DRINK</p>
+                    <p onClick={() => setSelectedItem('drink')} className={`text-lg font-semibold p-3 border-b-4 cursor-pointer ${selectedItem === 'drinks' ? 'text-[#D99904] border-[#D99904]' : 'text-[#151515] border-transparent hover:border-[#151515]'} transition-all`}>DRINK</p>
                 </li>
             </ul>
 
@@ -53,7 +53,7 @@ const Order = () => {
                 {selectedItem === 'pizza' ? pizza.map(item => <Card key={item._id} item={item} />) : ''}
                 {selectedItem === 'soup' ? soup.map(item => <Card key={item._id} item={item} />) : ''}
                 {selectedItem === 'desserts' ? desserts.map(item => <Card key={item._id} item={item} />) : ''}
-                {selectedItem === 'drinks' ? drinks.map(item => <Card key={item._id} item={item} />) : ''}
+                {selectedItem === 'drink' ? drinks.map(item => <Card key={item._id} item={item} />) : ''}
             </div>
         </div>
     )

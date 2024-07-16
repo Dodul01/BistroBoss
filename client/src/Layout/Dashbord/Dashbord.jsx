@@ -34,7 +34,7 @@ const Dashbord = () => {
             </Link>
         </li>
         <li>
-            <Link to={'/dashbord/cart'} className="flex items-center uppercase p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
+            <Link to={'/dashbord/paymentHistory'} className="flex items-center uppercase p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
                 <FaWallet className="text-2xl black" />
                 <span className="ms-3">payment history</span>
             </Link>
@@ -94,13 +94,13 @@ const Dashbord = () => {
             </Link>
         </li>
         <li>
-            <Link to={'/order'} className="flex items-center uppercase p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
+            <Link to={'/menu'} className="flex items-center uppercase p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
                 <IoMenu className="text-2xl black" />
                 <span className="ms-3">Menu</span>
             </Link>
         </li>
         <li>
-            <Link to={''} className="flex items-center uppercase p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
+            <Link to={'/order'} className="flex items-center uppercase p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
                 <FaBagShopping className="text-2xl black" />
                 <span className="ms-3">Shop</span>
             </Link>

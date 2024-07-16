@@ -32,6 +32,7 @@ async function run() {
         const menusCollection = db.collection('menu');
         const reviewsCollection = db.collection('reviews');
         const cartCollection = db.collection('carts');
+        const paymentCollection = db.collection('payments');
 
         // middleware
         const verifyToken = (req, res, next) => {
@@ -221,6 +222,34 @@ async function run() {
             })
         });
 
+
+        app.post('/payments', async (req, res) => {
+            const payment = req.body;
+            const result = await paymentCollection.insertOne(payment);
+            //delete all item from cart
+            console.log('payment info ', payment);
+
+            const query = {
+                _id: {
+                    $in: payment.cartIds.map(id => new ObjectId(id))
+                }
+            }
+
+            const deletedResult = await cartCollection.deleteMany(query);
+
+            res.send({ result, deletedResult });
+        });
+
+        app.get('/payments/:email', verifyToken, async (req, res) => {
+            const query = { email: req.params.email };
+            
+            if (req.params.email !== req.decoded.email) {
+                return res.status(403).send({ message: 'Forbidden Access' })
+            }
+
+            const result = await paymentCollection.find(query).toArray();
+            res.send(result);
+        });
 
         // Send a ping to confirm a successful connection
         // await client.db("admin").command({ ping: 1 });
